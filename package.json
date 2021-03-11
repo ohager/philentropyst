@@ -1,6 +1,6 @@
 {
   "name": "philentropyst",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Efficient data masking tool",
   "main": "./src/index.js",
   "bin": {
