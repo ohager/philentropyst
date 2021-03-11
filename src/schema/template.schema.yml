@@ -1,0 +1,28 @@
+schema:
+  version: 1.0
+  # csv is the only supported format yet
+  # Later we'll have support for json and other formats
+  csv:
+    delimiter: ,
+    endline: \n
+    hasHeader: true
+    escapeChar: \"
+    enclosedChar: \"
+  # masks define what fields has to be masked and how
+  masks:
+    # you can set the locale for the masks: https://github.com/marak/Faker.js/#localization
+    locale: "en"
+    - field:
+        # ref means either column index (starting with 0) or name if hasHeader=true
+        ref: claimId
+        # type can be anything supported by https://github.com/marak/Faker.js/#api-methods
+        type: random.number
+        length: 10
+    - field:
+        ref: dob
+        type: date
+        # formats supported by https://www.npmjs.com/package/fast-date-format
+        format: YYYY/MM/DD
+    - field:
+        ref: firstName
+        type: name.firstName

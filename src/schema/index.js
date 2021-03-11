@@ -1,16 +1,15 @@
-const { onShutdown } = require('node-graceful-shutdown')
-const { sleep } = require('../shared/sleep')
+const { copyFileSync } = require('fs')
+const { join } = require('path')
 
-async function schema ({ logger }) {
-  logger.info('schema')
-  await sleep(2000)
+const SchemaTemplatePath = join(__dirname, './template.schema.yml')
+
+async function schema ({ logger, outfile }) {
+  const outfilePath = join(process.cwd(), './schema.yml')
+  logger.info('Writing default schema...')
+  copyFileSync(SchemaTemplatePath,outfilePath)
+  logger.info(`Written to: ${outfilePath}`)
   return Promise.resolve()
 }
-
-onShutdown('schema', async () => {
-  console.log('closing...')
-  await sleep(2000)
-})
 
 module.exports = {
   schema

@@ -19,8 +19,7 @@ function getLogger (opts) {
 
 program.version(version)
 
-program
-  .command('mask', { isDefault: true })
+program.command('mask', { isDefault: true })
   .requiredOption('-i, --input <path>', 'Input File')
   .requiredOption('-o, --output <path>', 'Output File')
   .requiredOption('-s, --schema <path>', 'The Masking Schema')
@@ -38,7 +37,7 @@ program
   })
 
 program.command('schema')
-  .requiredOption('-n, --name <path>', 'Schema file name')
+  .option('-o, --outfile <path>', 'Outfile Schema file name', 'schema.yml')
   .option('-l, --logfile <path>', 'The logfile name')
   .option('-v, --verbose', 'Verbose output')
   .option('-q, --quiet', 'No output at all')

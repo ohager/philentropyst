@@ -2,17 +2,10 @@ const { StdoutLogger } = require('./stdoutLogger')
 const { FileLogger } = require('./fileLogger')
 
 class LoggerFactory {
-  static create ({
-    logLevel,
-    logfilePath
-  }) {
-    if (logfilePath) {
-      return new FileLogger({ logfilePath, logLevel })
-    }
-
-    return new StdoutLogger({
-      logLevel
-    })
+  static create ({ logLevel, logfilePath }) {
+    return logfilePath
+      ? new FileLogger({ logfilePath, logLevel })
+      : new StdoutLogger({ logLevel })
   }
 }
 
