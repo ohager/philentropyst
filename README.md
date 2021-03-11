@@ -1,5 +1,6 @@
 # philentropyst
-Masking tool to efficiently mask sensible data
+
+Masking tool to efficiently mask sensible data in CSV files (and more to come)
 
 # Install
 
@@ -14,7 +15,13 @@ just type
 
 Once installed run
 
-`philentropyst inputfile.json -o newfile.json`
+`philentropyst -i inputfile.csv -s inputfile.schema.yml`
+
+To create a necessary masking schema do:
+
+`philentropyst schema -o inputfile.schema.yml`
+
+Open the file in your editor and start editing according your needs
 
 To get more help type:
 
