@@ -118,6 +118,7 @@ async function maskCsv ({ input, output, schema, logger, onProgress, onFinish, o
         onFinish && onFinish(line)
         writer.close()
         logger.info(`Success - Processed ${line} lines`)
+        logger.info(`Masked file written to: ${output}`)
         resolve()
       })
       .on('error', err => {
