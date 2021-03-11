@@ -4,7 +4,7 @@
   "description": "Efficient data masking tool",
   "main": "./src/index.js",
   "bin": {
-    "philantropyst": "./cli.js"
+    "philentropyst": "./cli.js"
   },
   "scripts": {
     "format": "standard --fix",
