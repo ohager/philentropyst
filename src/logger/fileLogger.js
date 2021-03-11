@@ -13,7 +13,7 @@ class FileLogger extends Logger {
       level: logLevel
     }, destination)
 
-    super(logger)
+    super(logger, true)
 
     setInterval(function () {
       this._logger.flush()

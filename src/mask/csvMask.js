@@ -9,12 +9,18 @@ function buildCsvOptionsBySchema (schema) {
   return {
     delimiter: s.delimiter,
     multiline: s.multiline,
-    allowQuotes: s.allowQuotes
+    allowQuotes: s.allowQuotes,
+    wrapStringInQuotes: s.wrapStringInQuotes,
+    parseNumbers: s.parseNumbers,
+    parseBooleans: s.parseBooleans,
+    trim: s.trim
   }
 }
 
 function normalizeString (str) {
-  return str.trim().toLowerCase().replace(/"/ig, '')
+  return typeof(str) === 'string'
+    ? str.trim().toLowerCase().replace(/"/ig, '')
+    : str
 }
 
 const wrapInQuotes = str => `"${str}"`
@@ -86,7 +92,7 @@ function countFileLines (filePath) {
   })
 }
 
-async function maskCsv ({ input, output, schema, logger, onProgress = () => {} }) {
+async function maskCsv ({ input, output, schema, logger, onProgress, onFinish, onError }) {
   const csvOptions = buildCsvOptionsBySchema(schema)
   const decode = new AutoDetectDecoderStream({ defaultEncoding: 'utf-8' })
   const readCsv = new CsvReadableStream(csvOptions)
@@ -105,17 +111,19 @@ async function maskCsv ({ input, output, schema, logger, onProgress = () => {} }
       })
       .on('data', chunk => {
         line++
-        onProgress(line, lineCount)
+        onProgress && onProgress(line, lineCount)
         maskLine({ schema, logger, writer, line, fieldMap, chunk })
       })
       .on('end', () => {
-        logger.info(`Success - Processed ${line} lines`)
+        onFinish && onFinish(line)
         writer.close()
+        logger.info(`Success - Processed ${line} lines`)
         resolve()
       })
       .on('error', err => {
-        logger.error(`Failed processing at line ${line}`)
+        onError && onError(line)
         writer.close()
+        logger.error(`Failed processing at line ${line}`)
         reject(err)
       })
   })

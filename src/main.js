@@ -1,5 +1,6 @@
-const { LoggerFactory } = require('./logger')
 const { program } = require('commander')
+const path  = require('path')
+const { LoggerFactory } = require('./logger')
 const { schema } = require('./schema')
 const { mask } = require('./mask')
 const { version } = require('../package.json')
@@ -21,30 +22,31 @@ program.version(version)
 
 program.command('mask', { isDefault: true })
   .requiredOption('-i, --input <path>', 'Input File')
-  .requiredOption('-o, --output <path>', 'Output File')
   .requiredOption('-s, --schema <path>', 'The Masking Schema')
+  .option('-o, --output <path>', 'Output File', '<inputfile>.masked.<inputfile.suffix>')
   .option('-l, --logfile <path>', 'The logfile name')
   .option('-v, --verbose', 'Verbose output')
   .option('-q, --quiet', 'No output at all')
   .action(async (opts) => {
-    const { schema, output, input, quiet } = opts
+    if(opts.output.startsWith('<inputfile>')){
+      const extname = path.extname(opts.input)
+      opts.output = opts.input.replace(extname, `.masked${extname}`)
+    }
     await mask({
-      schema,
-      input,
-      output,
-      quiet,
-      logger: getLogger(opts)
+      ...opts,
+      logger: getLogger(opts),
     })
   })
 
 program.command('schema')
-  .option('-o, --outfile <path>', 'Outfile Schema file name', 'schema.yml')
+  .requiredOption('-o, --outfile <path>', 'Outfile Schema file name', 'schema.yml')
   .option('-l, --logfile <path>', 'The logfile name')
   .option('-v, --verbose', 'Verbose output')
   .option('-q, --quiet', 'No output at all')
   .action(async (opts) => {
     await schema({
-      logger: getLogger(opts)
+      ...opts,
+      logger: getLogger(opts),
     })
   })
 

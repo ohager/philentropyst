@@ -3,10 +3,12 @@ const pino = require('pino')
 let refCount = 0 // eslint-disable-line
 
 class Logger {
-  constructor (logger) {
+  constructor (logger, asyncCleanup = false) {
     refCount += 1 // eslint-disable-line
     this._logger = logger
-    this._initializeCleanupProcess()
+    if(asyncCleanup){
+      this._initializeCleanupProcess()
+    }
   }
 
   _initializeCleanupProcess () {

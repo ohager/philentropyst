@@ -8,6 +8,10 @@ schema:
     allowQuotes: true
     hasHeader: true
     wrapStringInQuotes: true
+    # if false numbers and booleans become strings
+    parseNumbers: true
+    parseBooleans: true
+    trim: true
   # masks define what fields has to be masked and how
   masks:
     - field:
@@ -16,9 +20,9 @@ schema:
         options:
           min: 2000
           max: 2021
-    - field:
-        ref: Flood
-        type: random.float
-        options:
-          min: 4000
-          max: 10000
+#    - field:
+#        ref: Flood
+#        type: random.float
+#        options:
+#          min: 4000
+#          max: 10000

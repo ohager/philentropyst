@@ -12,11 +12,11 @@ schema:
   masks:
     - field:
         ref: height
-        type: finance.amount
+        type: random.float
         options:
           min: 60
           max: 70
           decimals: 2
     - field:
-        ref: Flood
-        type: random.number
+        ref: name
+        type: name.findName

@@ -7,22 +7,29 @@ schema:
     multiline: true
     allowQuotes: true
     hasHeader: true
-    # auto detect encoding, or specify conforming nodejs supports
-    encoding: auto
+    # force strings to be wrapped in double quotes
+    wrapStringInQuotes: true
+    # if false numbers and booleans become strings
+    parseNumbers: true
+    parseBooleans: true
+    # removes leading and trailing whitespaces - not good for fixed sized csvs
+    trim: true
   # masks define what fields has to be masked and how
   masks:
-    # you can set the locale for the masks: https://github.com/marak/Faker.js/#localization
     - field:
         # ref means either column index (starting with 0) or name if hasHeader=true
-        ref: claimId
+        ref: field1
         # type can be anything supported by https://github.com/marak/Faker.js/#api-methods
         type: random.number
-        length: 10
+        options:
+          min: 1000
+          max: 10000
     - field:
-        ref: dob
+        ref: field2
         type: date
         # formats supported by https://www.npmjs.com/package/fast-date-format
-        format: YYYY/MM/DD
+        options:
+          format: YYYY/MM/DD
     - field:
         ref: firstName
         type: name.firstName
