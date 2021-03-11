@@ -8,6 +8,9 @@ schema:
     allowQuotes: true
     hasHeader: true
     wrapStringInQuotes: true
+    parseNumbers: true
+    parseBooleans: true
+    trim: true
   # masks define what fields has to be masked and how
   masks:
     - field:
