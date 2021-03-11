@@ -2,6 +2,10 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run format
+
 if [ -z "$(git status --porcelain)" ]; then
-  git commit -am "fix: format";
+  echo "All fine"
+else
+  echo "Some files were formatted..."
+  git commit -am "fix: format" --no-verify;
 fi
