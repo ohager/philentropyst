@@ -2,7 +2,7 @@ const { readFileSync } = require('fs')
 const { maskCsv } = require('./csvMask')
 const yaml = require('yaml')
 const { SingleBar, Presets } = require('cli-progress')
-const { performance, PerformanceObserver } = require("perf_hooks")
+const { performance, PerformanceObserver } = require('perf_hooks')
 
 const progressBar = new SingleBar({}, Presets.rect)
 let progressStarted = false
@@ -21,7 +21,7 @@ function updateProgressBar (progress, total) {
   }
 }
 
-function stopProgressBar(line) {
+function stopProgressBar (line) {
   progressBar.update(line)
   progressBar.stop()
 }
@@ -31,10 +31,10 @@ async function mask ({ input, output, schema, logger, quiet }) {
 
   const perfObserver = new PerformanceObserver((items) => {
     items.getEntries().forEach((entry) => {
-      logger.info(`Overall duration: ${(entry.duration/1000).toFixed(3)}s`)
+      logger.info(`Overall duration: ${(entry.duration / 1000).toFixed(3)}s`)
     })
   })
-  perfObserver.observe({ entryTypes: ["measure"], buffered: true })
+  perfObserver.observe({ entryTypes: ['measure'], buffered: true })
 
   performance.mark('mask-start')
   const maskSchema = readSchema(schema)

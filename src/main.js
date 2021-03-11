@@ -1,5 +1,5 @@
 const { program } = require('commander')
-const path  = require('path')
+const path = require('path')
 const { LoggerFactory } = require('./logger')
 const { schema } = require('./schema')
 const { mask } = require('./mask')
@@ -28,13 +28,13 @@ program.command('mask', { isDefault: true })
   .option('-v, --verbose', 'Verbose output')
   .option('-q, --quiet', 'No output at all')
   .action(async (opts) => {
-    if(opts.output.startsWith('<inputfile>')){
+    if (opts.output.startsWith('<inputfile>')) {
       const extname = path.extname(opts.input)
       opts.output = opts.input.replace(extname, `.masked${extname}`)
     }
     await mask({
       ...opts,
-      logger: getLogger(opts),
+      logger: getLogger(opts)
     })
   })
 
@@ -46,7 +46,7 @@ program.command('schema')
   .action(async (opts) => {
     await schema({
       ...opts,
-      logger: getLogger(opts),
+      logger: getLogger(opts)
     })
   })
 

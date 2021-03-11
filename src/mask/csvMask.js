@@ -18,7 +18,7 @@ function buildCsvOptionsBySchema (schema) {
 }
 
 function normalizeString (str) {
-  return typeof(str) === 'string'
+  return typeof (str) === 'string'
     ? str.trim().toLowerCase().replace(/"/ig, '')
     : str
 }

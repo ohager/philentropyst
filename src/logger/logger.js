@@ -6,7 +6,7 @@ class Logger {
   constructor (logger, asyncCleanup = false) {
     refCount += 1 // eslint-disable-line
     this._logger = logger
-    if(asyncCleanup){
+    if (asyncCleanup) {
       this._initializeCleanupProcess()
     }
   }
