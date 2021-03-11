@@ -1,17 +1,17 @@
-const { Logger } = require('./shared/logger')
+const { LoggerFactory } = require('./shared/logger')
 const { program } = require('commander')
 const { schema } = require('./schema')
 const { mask } = require('./mask')
 const { version } = require('../package.json')
 
-function buildLogger (opts) {
+function getLogger (opts) {
   let logLevel = 'info'
   if (opts.quiet) {
     logLevel = 'silent'
   } else if (opts.verbose) {
     logLevel = 'trace'
   }
-  return new Logger({
+  return LoggerFactory.create({
     logfilePath: opts.logfile,
     logLevel
   })
@@ -33,7 +33,7 @@ program
       schema,
       input,
       output,
-      logger: buildLogger(opts)
+      logger: getLogger(opts)
     })
   })
 
@@ -44,7 +44,7 @@ program.command('schema')
   .option('-q, --quiet', 'No output at all')
   .action(async (opts) => {
     await schema({
-      logger: buildLogger(opts)
+      logger: getLogger(opts)
     })
   })
 
