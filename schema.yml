@@ -3,10 +3,10 @@ schema:
   # csv is the only supported format yet
   # Later we'll have support for json and other formats
   csv:
-    delimiter: ,
+    delimiter: "|"
     multiline: true
     allowQuotes: true
-    hasHeader: true
+    hasHeader: false
     # auto detect encoding, or specify conforming nodejs supports
     encoding: auto
   # masks define what fields has to be masked and how
@@ -19,7 +19,7 @@ schema:
         type: random.number
         length: 10
     - field:
-        ref: dob
+        ref: 1
         type: date
         # formats supported by https://www.npmjs.com/package/fast-date-format
         format: YYYY/MM/DD

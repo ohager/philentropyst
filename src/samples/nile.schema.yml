@@ -1,0 +1,24 @@
+schema:
+  version: 1.0
+  # csv is the only supported format yet
+  # Later we'll have support for json and other formats
+  csv:
+    delimiter: ,
+    multiline: false
+    allowQuotes: true
+    hasHeader: true
+    wrapStringInQuotes: true
+  # masks define what fields has to be masked and how
+  masks:
+    - field:
+        ref: year
+        type: random.number
+        options:
+          min: 2000
+          max: 2021
+    - field:
+        ref: Flood
+        type: random.float
+        options:
+          min: 4000
+          max: 10000

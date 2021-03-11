@@ -1,0 +1,22 @@
+schema:
+  version: 1.0
+  # csv is the only supported format yet
+  # Later we'll have support for json and other formats
+  csv:
+    delimiter: ,
+    multiline: false
+    allowQuotes: true
+    hasHeader: true
+    wrapStringInQuotes: true
+  # masks define what fields has to be masked and how
+  masks:
+    - field:
+        ref: height
+        type: finance.amount
+        options:
+          min: 60
+          max: 70
+          decimals: 2
+    - field:
+        ref: Flood
+        type: random.number

@@ -1,4 +1,4 @@
-const { LoggerFactory } = require('./shared/logger')
+const { LoggerFactory } = require('./logger')
 const { program } = require('commander')
 const { schema } = require('./schema')
 const { mask } = require('./mask')
@@ -27,11 +27,12 @@ program.command('mask', { isDefault: true })
   .option('-v, --verbose', 'Verbose output')
   .option('-q, --quiet', 'No output at all')
   .action(async (opts) => {
-    const { schema, output, input } = opts
+    const { schema, output, input, quiet } = opts
     await mask({
       schema,
       input,
       output,
+      quiet,
       logger: getLogger(opts)
     })
   })
