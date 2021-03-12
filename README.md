@@ -26,3 +26,9 @@ Open the file in your editor and start editing according your needs
 To get more help type:
 
 `philentropyst --help`
+
+
+# Data Generators
+
+See [Generator Types](./GENERATOR_TYPES.md)
+
