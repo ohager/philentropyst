@@ -42,7 +42,6 @@
     "fast-date-format": "^2.2.4",
     "node-graceful-shutdown": "^1.1.0",
     "pino": "^6.11.1",
-    "pino-pretty": "^4.7.1",
-    "through2": "^4.0.2"
+    "pino-pretty": "^4.7.1"
   }
 }
