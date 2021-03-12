@@ -1,4 +1,4 @@
 .idea
 .husky
-src/samples
+examples
 src/__tests__
