@@ -1,2 +1,4 @@
-./src/samples
-./src/__tests__
+.idea
+.husky
+src/samples
+src/__tests__
