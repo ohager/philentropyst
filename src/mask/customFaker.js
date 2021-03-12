@@ -10,7 +10,7 @@ class CustomFaker {
     if (!this[t]) {
       throw Error(`Type '${type}' not supported`)
     }
-    return this[t](this, options)
+    return this[t](options)
   }
 
   fixedValue (options) {

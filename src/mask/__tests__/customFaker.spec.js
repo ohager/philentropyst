@@ -13,7 +13,7 @@ describe('CustomFaker', () => {
     })
 
     describe('fixedValue', () => {
-      it('should apply data for known method/type - replace', () => {
+      it('should apply data for known method/type', () => {
         const data = customFaker.apply({ type: 'fixedValue', options: 'XXXXX' })
         expect(data).toBe('XXXXX')
       })
