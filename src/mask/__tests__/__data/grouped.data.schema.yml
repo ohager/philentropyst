@@ -1,0 +1,37 @@
+schema:
+  version: 1.0
+  # csv is the only supported format yet
+  # Later we'll have support for json and other formats
+  csv:
+    delimiter: ,
+    multiline: false
+    allowQuotes: true
+    hasHeader: true
+    wrapStringInQuotes: true
+    # if false numbers and booleans become strings
+    parseNumbers: false
+    parseBooleans: false
+    trim: true
+    group:
+      ref: orderId
+      fields:
+        - firstName
+        - lastName
+        - cc
+  # masks define what fields has to be masked and how
+  masks:
+    - field:
+        ref: firstName
+        type: name.firstName
+    - field:
+        ref: lastName
+        type: name.lastName
+    - field:
+        ref: cc
+        type: finance.creditCardNumber
+    - field:
+        ref: pid
+        type: random.number
+        options:
+          min: 1000000
+          max: 9999999

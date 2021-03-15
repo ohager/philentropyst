@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs')
-const { maskCsv } = require('./csvMask')
 const yaml = require('yaml')
+const { maskCsv } = require('./csvMask')
 const { SingleBar, Presets } = require('cli-progress')
 const { performance, PerformanceObserver } = require('perf_hooks')
 

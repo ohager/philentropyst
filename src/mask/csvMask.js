@@ -2,7 +2,7 @@ const { EOL } = require('os')
 const { createReadStream, createWriteStream } = require('fs')
 const CsvReadableStream = require('csv-reader')
 const AutoDetectDecoderStream = require('autodetect-decoder-stream')
-const { generateData } = require('./generateData')
+const { DataGenerator } = require('./dataGenerator')
 
 function buildCsvOptionsBySchema (schema) {
   const s = schema.csv
@@ -25,18 +25,26 @@ function normalizeString (str) {
 
 const wrapInQuotes = str => `"${str}"`
 
-function maskLine ({ schema, logger, writer, line, fieldMap, chunk }) {
+function maskLine ({ schema, logger, writer, line, fieldMap, chunk, generator }) {
   const csv = schema.csv
   const masks = schema.masks
   const isHeader = schema.csv.hasHeader && line === 1
 
-  masks.forEach(({ field }) => {
-    const ref = normalizeString(field.ref)
-    const fieldIndex = csv.hasHeader ? fieldMap[ref] : parseInt(ref, 10)
-    if (!isHeader && !Number.isNaN(fieldIndex) && fieldIndex < chunk.length) {
-      chunk[fieldIndex] = generateData(field)
-    }
-  })
+  let groupId
+  if (schema.csv.group) {
+    const groupRef = normalizeString(schema.csv.group.ref)
+    const groupIdIndex = fieldMap[groupRef]
+    groupId = chunk[groupIdIndex]
+  }
+
+  masks
+    .forEach(({ field }) => {
+      const ref = normalizeString(field.ref)
+      const fieldIndex = csv.hasHeader ? fieldMap[ref] : parseInt(ref, 10)
+      if (!isHeader && !Number.isNaN(fieldIndex) && fieldIndex < chunk.length) {
+        chunk[fieldIndex] = generator.generate(field, groupId)
+      }
+    })
 
   const processedChunk = chunk
     .map(v => typeof (v) === 'string' && csv.wrapStringInQuotes
@@ -94,6 +102,7 @@ function countFileLines (filePath) {
 
 async function maskCsv ({ input, output, schema, logger, onProgress, onFinish, onError }) {
   const csvOptions = buildCsvOptionsBySchema(schema)
+  const generator = new DataGenerator(schema)
   const decode = new AutoDetectDecoderStream({ defaultEncoding: 'utf-8' })
   const readCsv = new CsvReadableStream(csvOptions)
   const writer = createWriteStream(output)
@@ -112,7 +121,15 @@ async function maskCsv ({ input, output, schema, logger, onProgress, onFinish, o
       .on('data', chunk => {
         line++
         onProgress && onProgress(line, lineCount)
-        maskLine({ schema, logger, writer, line, fieldMap, chunk })
+        maskLine({
+          chunk,
+          fieldMap,
+          generator,
+          line,
+          logger,
+          schema,
+          writer
+        })
       })
       .on('end', () => {
         onFinish && onFinish(line)

@@ -14,6 +14,14 @@ schema:
     parseBooleans: true
     # removes leading and trailing whitespaces - not good for fixed sized csvs
     trim: true
+    # (optional) use this to indicate that lines are grouped by a certain field
+    # in that case the ref points to the column, and fields is a list of field references
+    # which should receive the same data per group, i.e. firstName, lastName
+#    group:
+#      ref: field1
+#      fields:
+#        - field2
+#        - firstName
   # masks define what fields has to be masked and how
   masks:
     - field:
@@ -26,10 +34,7 @@ schema:
           max: 10000
     - field:
         ref: field2
-        type: date
-        # formats supported by https://www.npmjs.com/package/fast-date-format
-        options:
-          format: YYYY/MM/DD
+        type: date.past
     - field:
         ref: firstName
         type: name.firstName
