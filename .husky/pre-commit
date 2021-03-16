@@ -2,3 +2,10 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run format
+
+if [ -z "$(npm run format | grep " changed")" ]; then
+  echo "All fine"
+else
+  echo "Some files were formatted..."
+  git commit -am "fix: format" --no-verify;
+fi
