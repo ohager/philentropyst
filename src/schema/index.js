@@ -7,7 +7,7 @@ async function schema ({ logger, outfile }) {
   const outfilePath = join(process.cwd(), outfile)
   logger.info('Creating default schema...')
   copyFileSync(SchemaTemplatePath, outfilePath)
-  logger.info(`Written to: ${outfilePath}`)
+  logger.info(`Successfully written to: ${outfilePath}`)
   return Promise.resolve()
 }
 
