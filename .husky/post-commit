@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# check if pre-commit formatted files
+if [ -z "$(git status --porcelain)" ]; then
+  echo "All fine"
+else
+  echo "Some files were formatted..."
+  git commit -am "fix: format" --no-verify;
+fi
