@@ -1,7 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-if [ -z "$(npm run --silent format)" ]; then
+npm run format
+
+if [ -z "$(git status --porcelain)" ]; then
   echo "All fine"
 else
   echo "Some files were formatted..."
