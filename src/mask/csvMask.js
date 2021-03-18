@@ -61,7 +61,7 @@ function maskLine ({ schema, logger, writer, line, fieldMap, chunk, generator })
 function buildFieldMap ({ schema, header, logger }) {
   const fieldMap = {}
   const masksRefs = schema.masks.map(({ field }) => normalizeString(field.ref))
-  if(schema.csv.group){
+  if (schema.csv.group) {
     masksRefs.push(schema.csv.group.ref)
   }
   if (schema.csv.hasHeader) {
@@ -78,7 +78,7 @@ function buildFieldMap ({ schema, header, logger }) {
       const index = parseInt(ref, 10)
       if (Number.isNaN(index) || index < 0 || index >= header.length) {
         logger.warn(`Invalid numeric ref '${ref}' (must be between 0 and ${header.length - 1})`)
-      }else {
+      } else {
         fieldMap[index] = index
       }
     })
