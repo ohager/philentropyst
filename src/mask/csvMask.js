@@ -80,7 +80,7 @@ function maskLine ({ schema, logger, writer, line, fieldMap, chunk, generator, c
 function buildFieldMap ({ schema, header, logger }) {
   const fieldMap = {}
   const masksRefs = schema.masks.map(({ field }) => normalizeString(field.ref))
-  const cacheRefs = schema.csv.cache && schema.csv.cache.fields.map((field) => normalizeString(field))
+  const cacheRefs = (schema.csv.cache && schema.csv.cache.fields.map((field) => normalizeString(field))) || []
   if (schema.csv.group) {
     masksRefs.push(schema.csv.group.ref)
   }
