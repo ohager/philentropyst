@@ -1,0 +1,109 @@
+schema:
+  version: 1.0
+  # csv is the only supported format yet
+  # Later we'll have support for json and other formats
+  csv:
+    delimiter: "|"
+    multiline: true
+    allowQuotes: false
+    hasHeader: false
+    # force strings to be wrapped in double quotes
+    wrapStringInQuotes: false
+    # if false numbers and booleans become strings
+    parseNumbers: false
+    parseBooleans: false
+    # removes leading and trailing whitespaces - not good for fixed sized csvs
+    trim: false
+    # (optional) use this to indicate that lines are grouped by a certain field
+    # in that case the ref points to the column, and fields is a list of field references
+    # which should receive the same data per group, i.e. firstName, lastName
+    group:
+      # claimId
+      ref: 1
+      fields:
+        - 14
+        - 15
+        - 17
+        - 18
+        - 42
+        - 91
+        - 92
+        - 93
+        - 94
+        - 95
+        - 100
+        - 122
+        - 123
+        - 124
+  # masks define what fields has to be masked and how
+  masks:
+    - field:
+        # provider_tin
+        ref: 14
+        # type can be anything supported by https://github.com/marak/Faker.js/#api-methods
+        type: random.number
+        options:
+          min: 100000000
+          max: 999999999
+    - field:
+        # patient_last_name
+        ref: 15
+        type: name.lastName
+    - field:
+        # patient_first_name
+        ref: 17
+        type: name.firstName
+    - field:
+        # subscriber_last_name
+        ref: 18
+        type: name.lastName
+    - field:
+        # provider_name
+        ref: 42
+        type: name.findName
+    - field:
+        # location_address_1
+        ref: 91
+        type: address.streetAddress
+    - field:
+        # location_address_2
+        ref: 92
+        type: custom.fixedValue
+        options: ""
+    - field:
+        # location_city
+        ref: 93
+        type: address.city
+    - field:
+        # location_state
+        ref: 94
+        type: address.state
+    - field:
+        # location_zip
+        ref: 95
+        type: address.zipCode
+    - field:
+        # location_zip
+        ref: 100
+        type: name.findName
+    - field:
+        # billing_provider_npi
+        ref: 122
+        type: random.number
+        options:
+          min: 1000000000
+          max: 9999999999
+    - field:
+        # facility_npi
+        ref: 123
+        type: random.number
+        options:
+          min: 1000000000
+          max: 9999999999
+    - field:
+        # physician_npi
+        ref: 124
+        type: random.number
+        options:
+          min: 1000000000
+          max: 9999999999

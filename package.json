@@ -39,6 +39,8 @@
     "csv-reader": "^1.0.7",
     "faker": "^5.4.0",
     "fast-date-format": "^2.2.4",
+    "fs-extra": "^9.1.0",
+    "murmurhash": "^2.0.0",
     "node-graceful-shutdown": "^1.1.0",
     "pino": "^6.11.1",
     "pino-pretty": "^4.7.1",

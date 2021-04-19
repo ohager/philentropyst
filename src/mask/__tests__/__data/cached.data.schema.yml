@@ -9,16 +9,11 @@ schema:
     hasHeader: true
     wrapStringInQuotes: true
     # if false numbers and booleans become strings
-    parseNumbers: true
-    parseBooleans: true
+    parseNumbers: false
+    parseBooleans: false
     trim: true
     cache:
-      file: grouped.data.cache.json
-      fields:
-        - firstName
-        - lastName
-    group:
-      ref: orderId
+      name: cached.data
       fields:
         - firstName
         - lastName
