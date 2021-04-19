@@ -188,7 +188,6 @@ describe('csvMask Integration Tests', () => {
       expect(line3[4]).not.toBe(line1[4])
       expect(line3[5]).not.toBe(line1[5])
       expect(line3[6]).not.toBe(line1[6])
-
     })
   })
 })

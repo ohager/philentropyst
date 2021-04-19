@@ -10,9 +10,9 @@ class FileCache {
   loadSync () {
     this._logger.info(`Loading cache - ${this._fileName}`)
     ensureFileSync(this._fileName)
-    try{
+    try {
       this._data = readJsonSync(this._fileName)
-    }catch(e){
+    } catch (e) {
       this._data = {}
     }
   }
@@ -29,7 +29,6 @@ class FileCache {
   getValue (key) {
     return this._data[key]
   }
-
 }
 
 module.exports = {

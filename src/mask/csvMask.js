@@ -1,6 +1,6 @@
 const { EOL } = require('os')
 const { join } = require('path')
-const { createReadStream, createWriteStream, } = require('fs')
+const { createReadStream, createWriteStream } = require('fs')
 const CsvReadableStream = require('csv-reader')
 const AutoDetectDecoderStream = require('autodetect-decoder-stream')
 const { DataGenerator } = require('./dataGenerator')
@@ -8,7 +8,7 @@ const { FileCache } = require('../cache/fileCache')
 const murmurhash = require('murmurhash')
 
 // for murmurhash
-global.TextEncoder = require("util").TextEncoder;
+global.TextEncoder = require('util').TextEncoder
 
 function buildCsvOptionsBySchema (schema) {
   const s = schema.csv
