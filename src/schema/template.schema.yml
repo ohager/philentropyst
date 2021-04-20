@@ -22,6 +22,16 @@ schema:
 #      fields:
 #        - field2
 #        - firstName
+    # (optional) use cache to store previous field values and reuse them.
+    # A common use case is when you process multiple files, in which same data, e.g. persons,
+    # appear. So, you can keep consistent names across files
+#    cache:
+       # the name of the cache to be used - so you can work on different caches
+#      name: mycache
+#      fields:
+#        - field2
+#        - firstName
+
   # masks define what fields has to be masked and how
   masks:
     - field:
