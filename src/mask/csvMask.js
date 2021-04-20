@@ -6,8 +6,9 @@ const AutoDetectDecoderStream = require('autodetect-decoder-stream')
 const { DataGenerator } = require('./dataGenerator')
 const { FileCache } = require('../cache/fileCache')
 const murmurhash = require('murmurhash')
+const getAppDataPath = require('appdata-path')
+const { name: AppName } = require('../../package.json')
 
-// for murmurhash
 global.TextEncoder = require('util').TextEncoder
 
 function buildCsvOptionsBySchema (schema) {
@@ -101,7 +102,7 @@ function buildFieldMap ({ schema, header, logger }) {
   } else {
     masksRefs.forEach(ref => {
       const index = parseInt(ref, 10)
-      const cached = schema.csv.cache && schema.csv.cache.includes(ref)
+      const cached = schema.csv.cache && schema.csv.cache.fields.includes(ref)
       if (Number.isNaN(index) || index < 0 || index >= header.length) {
         logger.warn(`Invalid numeric ref '${ref}' (must be between 0 and ${header.length - 1})`)
       } else {
@@ -140,7 +141,7 @@ function initializeCache ({ schema, logger }) {
     logger.info('No cache used')
     return null
   }
-  const fileName = join(__dirname, './cache', `${schema.csv.cache.name}.json`)
+  const fileName = join(getAppDataPath(AppName), `${schema.csv.cache.name}.json`)
   const fileCache = new FileCache({ fileName, logger })
   fileCache.loadSync()
   return fileCache

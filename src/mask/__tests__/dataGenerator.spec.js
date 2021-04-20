@@ -24,7 +24,7 @@ const SchemaWithGroup = {
     },
     {
       ref: 'groupIndependentId',
-      type: 'random.number',
+      type: 'datatype.number',
       options: {
         min: 100000,
         max: 999999

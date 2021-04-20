@@ -15,7 +15,7 @@ schema:
   masks:
     - field:
         ref: height
-        type: random.float
+        type: datatype.float
         options:
           min: 60
           max: 70

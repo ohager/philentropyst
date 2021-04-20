@@ -1,6 +1,6 @@
 {
   "name": "philentropyst",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Efficient data masking tool",
   "main": "./src/index.js",
   "bin": {
@@ -33,17 +33,18 @@
     "standard": "^16.0.3"
   },
   "dependencies": {
+    "appdata-path": "^1.0.0",
     "autodetect-decoder-stream": "^1.0.3",
     "cli-progress": "^3.9.0",
-    "commander": "^7.1.0",
+    "commander": "^7.2.0",
     "csv-reader": "^1.0.7",
-    "faker": "^5.4.0",
+    "faker": "^5.5.3",
     "fast-date-format": "^2.2.4",
     "fs-extra": "^9.1.0",
     "murmurhash": "^2.0.0",
     "node-graceful-shutdown": "^1.1.0",
-    "pino": "^6.11.1",
+    "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
-    "yaml": "^1.10.0"
+    "yaml": "^1.10.2"
   }
 }

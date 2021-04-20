@@ -31,7 +31,7 @@ schema:
         type: finance.creditCardNumber
     - field:
         ref: pid
-        type: random.number
+        type: datatype.number
         options:
           min: 1000000
           max: 9999999

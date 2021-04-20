@@ -28,7 +28,7 @@ schema:
         # ref means either column index (starting with 0) or name if hasHeader=true
         ref: field1
         # type can be anything supported by https://github.com/marak/Faker.js/#api-methods
-        type: random.number
+        type: datatype.number
         options:
           min: 1000
           max: 10000
