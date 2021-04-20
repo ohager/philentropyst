@@ -30,7 +30,7 @@ program.command('mask', { isDefault: true })
   .action(async (opts) => {
     if (opts.output.startsWith('<inputfile>')) {
       const extname = path.extname(opts.input)
-      opts.output = extname ? opts.input.replace(extname, `.masked${extname}`): opts.input + '.masked'
+      opts.output = extname ? opts.input.replace(extname, `.masked${extname}`) : opts.input + '.masked'
     }
     await mask({
       ...opts,
